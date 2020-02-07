@@ -1,1 +1,20 @@
-<p>play works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-6">
+      <h1>{{nation}}</h1>
+    </div>
+    <div class="col-6">
+      <h2>Skóre: {{score}}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="btn-group" role="group" style="width: 800px; height: 600px">
+      <button type="button" class="btn btn-primary" (click)="clickedLeft()" id="leftButton" style="width: 400px;">
+        <h3>{{leftText}}</h3>
+      </button>
+      <button type="button" class="btn btn-warning" (click)="clickedRight()" id="rightButton" style="width: 400px;">
+        <h3>{{rightText}}</h3>
+      </button>
+    </div>
+  </div>
+</div>
