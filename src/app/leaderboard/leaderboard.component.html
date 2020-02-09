@@ -1,0 +1,31 @@
+<div class="card">
+  <div class="card-header text-center"><h2>Top 10</h2></div>
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Pozice</th>
+        <th scope="col">Jméno</th>
+        <th scope="col">Skóre</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let player of topPlayers; let i = index">
+        <td class="text-center"><p *ngIf="i>2">{{i + 1}}</p>
+          <img *ngIf="i==0" src="assets/img/golden.png" alt="golden" width="30">
+          <img *ngIf="i==1" src="assets/img/silver.png" alt="silver" width="30">
+          <img *ngIf="i==2" src="assets/img/bronze.png" alt="bronze" width="30">
+        </td>
+        <td class="text-left">{{ player.name }}</td>
+        <td class="text-center">{{ player.score }}</td>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col-12 text-center" >
+      <button type="button" class="btn btn-info btn-lg" routerLink="">
+        Domů
+      </button>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+[debug] [2020-02-09T12:44:08.667Z] ----------------------------------------------------------------------
+[debug] [2020-02-09T12:44:08.668Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\janikp\Documents\narodec\narodec\node_modules\firebase-tools\lib\bin\firebase.js serve --only functions
+[debug] [2020-02-09T12:44:08.668Z] CLI Version:   7.12.1
+[debug] [2020-02-09T12:44:08.668Z] Platform:      win32
+[debug] [2020-02-09T12:44:08.668Z] Node Version:  v12.14.1
+[debug] [2020-02-09T12:44:08.669Z] Time:          Sun Feb 09 2020 13:44:08 GMT+0100 (GMT+01:00)
+[debug] [2020-02-09T12:44:08.669Z] ----------------------------------------------------------------------
+[debug] [2020-02-09T12:44:08.669Z] 
+[debug] [2020-02-09T12:44:08.676Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-02-09T12:44:08.677Z] > authorizing via signed-in user
+[debug] [2020-02-09T12:44:08.677Z] [iam] checking project narodec-6efb9 for permissions ["firebase.projects.get"]
+[debug] [2020-02-09T12:44:08.678Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/narodec-6efb9:testIamPermissions  
+
+[debug] [2020-02-09T12:44:09.586Z] <<< HTTP RESPONSE 200
+[debug] [2020-02-09T12:44:09.588Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/narodec-6efb9  
+ 
+[debug] [2020-02-09T12:44:09.806Z] <<< HTTP RESPONSE 200
+[warn] !  Your requested "node" version "8" doesn't match your global version "12"
+[info] +  functions: Emulator started at http://localhost:5000
+[info] i  functions: Watching "C:\Users\janikp\Documents\narodec\narodec\functions" for Cloud Functions...
+[debug] [2020-02-09T12:44:12.469Z] [worker-pool] addWorker(~diagnostic~)
+[debug] [2020-02-09T12:44:12.469Z] [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2020-02-09T12:44:12.469Z] [worker-pool] submitWork(triggerId=)
+[debug] [2020-02-09T12:44:12.469Z] [worker-~diagnostic~-6813b591-b0d5-4c70-a262-5857dd410eeb]: Assigning socketPath: \\?\pipe\C:\Users\janikp\Documents\narodec\narodec\functions\24776
+[debug] [2020-02-09T12:44:12.469Z] [worker-~diagnostic~-6813b591-b0d5-4c70-a262-5857dd410eeb]: BUSY
+[debug] [2020-02-09T12:44:12.719Z] [runtime-status] [24776] Functions runtime initialized. {"cwd":"C:\\Users\\janikp\\Documents\\narodec\\narodec\\functions","node_version":"12.14.1"}
+[debug] [2020-02-09T12:44:12.720Z] [runtime-status] [24776] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-02-09T12:44:12.722Z] [runtime-status] [24776] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.2","resolution":"C:\\Users\\janikp\\Documents\\narodec\\narodec\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-02-09T12:44:12.723Z] [runtime-status] [24776] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\janikp\\Documents\\narodec\\narodec\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-02-09T12:44:12.723Z] [runtime-status] [24776] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\janikp\\Documents\\narodec\\narodec\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[info] +  functions[helloWorld]: http function initialized (http://localhost:5000/narodec-6efb9/us-central1/helloWorld).
+[debug] [2020-02-09T12:44:12.765Z] [worker-~diagnostic~-6813b591-b0d5-4c70-a262-5857dd410eeb]: IDLE
+[debug] [2020-02-09T12:44:14.833Z] [work-queue] {"queueLength":1,"workRunningCount":0}
+[debug] [2020-02-09T12:44:14.833Z] [work-queue] {"queueLength":0,"workRunningCount":1}
+[debug] [2020-02-09T12:44:14.834Z] Accepted request GET /narodec-6efb9/us-central1/helloWorld --> helloWorld
+[debug] [2020-02-09T12:44:14.961Z] [worker-pool] addWorker(helloWorld)
+[debug] [2020-02-09T12:44:14.961Z] [worker-pool] Adding worker with key helloWorld, total=1
+[debug] [2020-02-09T12:44:14.961Z] [worker-pool] submitWork(triggerId=helloWorld)
+[debug] [2020-02-09T12:44:14.961Z] [worker-helloWorld-4e2df9d3-0dfd-4460-af35-f67edaeb7862]: Assigning socketPath: \\?\pipe\C:\Users\janikp\Documents\narodec\narodec\functions\20492
+[debug] [2020-02-09T12:44:14.961Z] [worker-helloWorld-4e2df9d3-0dfd-4460-af35-f67edaeb7862]: BUSY
+[debug] [2020-02-09T12:44:15.302Z] [runtime-status] [20492] Functions runtime initialized. {"cwd":"C:\\Users\\janikp\\Documents\\narodec\\narodec\\functions","node_version":"12.14.1"}
+[debug] [2020-02-09T12:44:15.303Z] [runtime-status] [20492] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-02-09T12:44:15.305Z] [runtime-status] [20492] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.2","resolution":"C:\\Users\\janikp\\Documents\\narodec\\narodec\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-02-09T12:44:15.306Z] [runtime-status] [20492] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\janikp\\Documents\\narodec\\narodec\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-02-09T12:44:15.307Z] [runtime-status] [20492] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\janikp\\Documents\\narodec\\narodec\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-02-09T12:44:15.351Z] [runtime-status] [20492] Trigger "helloWorld" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "helloWorld"
+[debug] [2020-02-09T12:44:15.351Z] [runtime-status] [20492] triggerDefinition {"httpsTrigger":{},"name":"helloWorld","entryPoint":"helloWorld"}
+[debug] [2020-02-09T12:44:15.351Z] [runtime-status] [20492] Running helloWorld in mode HTTPS
+[debug] [2020-02-09T12:44:15.357Z] [runtime-status] [20492] Attempting to listen to socketPath: \\?\pipe\C:\Users\janikp\Documents\narodec\narodec\functions\20492
+[debug] [2020-02-09T12:44:15.364Z] [functions] Runtime ready! Sending request!
+[debug] [2020-02-09T12:44:15.371Z] [runtime-status] [20492] Ephemeral server handling GET request
+[debug] [2020-02-09T12:44:15.375Z] [runtime-status] [20492] Ephemeral server survived.
+[info] i  functions: Finished "helloWorld" in ~1s
+[debug] [2020-02-09T12:44:15.379Z] [worker-helloWorld-4e2df9d3-0dfd-4460-af35-f67edaeb7862]: IDLE
+[debug] [2020-02-09T12:44:15.379Z] [work-queue] {"queueLength":0,"workRunningCount":0}
+[debug] [2020-02-09T12:45:36.301Z] [worker-helloWorld-4e2df9d3-0dfd-4460-af35-f67edaeb7862]: exited
+[debug] [2020-02-09T12:45:36.302Z] [worker-helloWorld-4e2df9d3-0dfd-4460-af35-f67edaeb7862]: FINISHED
+[debug] [2020-02-09T12:45:36.310Z] [worker-~diagnostic~-6813b591-b0d5-4c70-a262-5857dd410eeb]: exited
+[debug] [2020-02-09T12:45:36.310Z] [worker-~diagnostic~-6813b591-b0d5-4c70-a262-5857dd410eeb]: FINISHED

@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {ShortcutInput} from 'ng-keyboard-shortcuts';
 
 @Component({
   selector: 'app-sign-in',
@@ -9,10 +10,22 @@ export class SignInComponent implements OnInit {
 
   private player = '';
 
+  shortcuts: ShortcutInput[] = [];
+
   constructor() {
   }
 
   ngOnInit() {
+    this.shortcuts.push(
+      {
+        key: ['enter'],
+        description: 'Enter',
+        command: e => {
+          document.getElementById('signin-button').click();
+        },
+        preventDefault: true
+      }
+    );
   }
 
 }

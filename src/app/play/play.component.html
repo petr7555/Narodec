@@ -1,20 +1,81 @@
-<div class="container-fluid">
+<div [hidden]="loaded"><h1>Vítej ve hře, {{player.name}}!</h1></div>
+<div [hidden]="!loaded" class="container">
   <div class="row">
-    <div class="col-6">
-      <h1>{{nation}}</h1>
+    <div class="col text-left">
+      <h1 class="p-1 m-0">{{country}}</h1>
     </div>
-    <div class="col-6">
-      <h2>Skóre: {{score}}</h2>
+    <div class="col text-right ">
+      <h2 class="p-1 m-0">Skóre: {{player.score}}</h2>
     </div>
   </div>
   <div class="row">
-    <div class="btn-group" role="group" style="width: 800px; height: 600px">
-      <button type="button" class="btn btn-primary" (click)="clickedLeft()" id="leftButton" style="width: 400px;">
-        <h3>{{leftText}}</h3>
-      </button>
-      <button type="button" class="btn btn-warning" (click)="clickedRight()" id="rightButton" style="width: 400px;">
-        <h3>{{rightText}}</h3>
-      </button>
+    <div class="col-12">
+      <div class="btn-group vh-50" id="buttonGroup" role="group">
+        <button type="button" class="btn btn-primary" (click)="clickedLeft()" id="leftButton">
+          <h3>{{leftText}}</h3>
+          <h3 *ngIf="showPercent" style="line-height: 1">{{percentLeft}} %</h3>
+          <div *ngIf="!showPercent" class="filler"></div>
+        </button>
+        <button type="button" class="btn btn-warning" (click)="clickedRight()" id="rightButton">
+          <h3>{{rightText}}</h3>
+          <h3 *ngIf="showPercent" style="line-height: 1">{{percentRight}} %</h3>
+          <div *ngIf="!showPercent" class="filler"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-3 text-left">
+      <button class="btn btn-info btn-lg" id="homeButton" (click)="open(mainScreenModal)">Domů</button>
+      <ng-template #mainScreenModal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="mainScreenModal">Opravdu chcete ukončit hru?</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Současná hra skončí a vaše skóre bude uloženo.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-success" (click)="modal.close()">Pokračovat ve hře</button>
+          <button type="button" class="btn btn-outline-danger" (click)="modal.close(); saveScore()"
+                  routerLink="">Ukončit
+          </button>
+        </div>
+      </ng-template>
+    </div>
+
+
+    <div class="col-6 text-center">
+      <fa-icon [icon]="faInfoCircle"></fa-icon>
+      <h5>Správnou odpověď vyberte kliknutím nebo stisknutím šipek na klávesnici
+        ( <fa-icon [icon]="faArrowLeft"></fa-icon> a
+        <fa-icon [icon]="faArrowRight"></fa-icon> ).
+      </h5>
+    </div>
+
+    <div class="col-3 text-right ">
+      <button class="btn btn-info btn-lg" id="leaderboardButton" (click)="open(leaderboardModal)">Nejvyšší skóre</button>
+      <ng-template #leaderboardModal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="leaderboardModal">Opravdu chcete ukončit hru?</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Současná hra skončí a vaše skóre bude uloženo.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-success" (click)="modal.close()">Pokračovat ve hře</button>
+          <button type="button" class="btn btn-outline-danger" (click)="modal.close(); saveScore()"
+                  routerLink="/leaderboard">Ukončit
+          </button>
+        </div>
+      </ng-template>
+
     </div>
   </div>
 </div>
+<ng-keyboard-shortcuts [shortcuts]="shortcuts"></ng-keyboard-shortcuts>

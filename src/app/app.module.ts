@@ -11,21 +11,32 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireMessagingModule} from '@angular/fire/messaging';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireFunctionsModule} from '@angular/fire/functions';
-import { PlayComponent } from './play/play.component';
-import { SignInComponent } from './sign-in/sign-in.component';
+import {PlayComponent} from './play/play.component';
+import {SignInComponent} from './sign-in/sign-in.component';
 import {FormsModule} from '@angular/forms';
+import {CreateNationComponent} from './nations/create-nation/create-nation.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+
+import * as firebase from 'firebase';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import {KeyboardShortcutsModule} from 'ng-keyboard-shortcuts';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+
+firebase.initializeApp(environment.firebase);
 
 @NgModule({
   declarations: [
     AppComponent,
     PlayComponent,
-    SignInComponent
+    SignInComponent,
+    CreateNationComponent,
+    LeaderboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebase, 'narodec'),
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
@@ -33,6 +44,9 @@ import {FormsModule} from '@angular/forms';
     AngularFireDatabaseModule,
     AngularFireFunctionsModule,
     FormsModule,
+    NgbModule,
+    KeyboardShortcutsModule.forRoot(),
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

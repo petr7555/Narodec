@@ -1,3 +1,29 @@
 .btn.disabled, .btn:disabled {
   opacity: 1;
 }
+
+.vh-50 {
+  height: 50vh;
+}
+
+button {
+  max-width: 50%;
+}
+
+.filler {
+  height: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+#leftButton, #rightButton {
+  min-width: 50%;
+  min-height: 100%;
+}
+
+#homeButton, #leaderboardButton {
+  min-width: 100%;
+}
+
+#buttonGroup {
+  min-width: 100%;
+}
