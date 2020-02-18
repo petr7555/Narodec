@@ -22,6 +22,7 @@ import * as firebase from 'firebase';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import {KeyboardShortcutsModule} from 'ng-keyboard-shortcuts';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {NgCircleProgressModule} from 'ng-circle-progress';
 
 firebase.initializeApp(environment.firebase);
 
@@ -46,7 +47,9 @@ firebase.initializeApp(environment.firebase);
     FormsModule,
     NgbModule,
     KeyboardShortcutsModule.forRoot(),
-    FontAwesomeModule
+    FontAwesomeModule,
+    // Specify ng-circle-progress as an import
+    NgCircleProgressModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

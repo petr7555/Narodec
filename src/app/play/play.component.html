@@ -1,10 +1,43 @@
 <div [hidden]="loaded"><h1>Vítej ve hře, {{player.name}}!</h1></div>
-<div [hidden]="!loaded" class="container">
+<div [hidden]="!showGameOverScreen"><h1>Game over!</h1></div>
+<div [hidden]="!loaded || showGameOverScreen" class="container">
   <div class="row">
-    <div class="col text-left">
+    <div class="col-3 text-left">
       <h1 class="p-1 m-0">{{country}}</h1>
     </div>
-    <div class="col text-right ">
+    <div class="col-3 text-left">
+      <circle-progress
+        [titleFormat]="formatSubtitle"
+        [percent]="timerPercent"
+        [radius]="30"
+        [animation]="false"
+        [backgroundStrokeWidth]="0"
+        [space]="-5"
+        [toFixed]="0"
+        [maxPercent]="100"
+        [outerStrokeGradient]="true"
+        [outerStrokeWidth]="5"
+        [outerStrokeColor]="'#4882c2'"
+        [outerStrokeGradientStopColor]="'#53a9ff'"
+        [innerStrokeColor]="'#e7e8ea'"
+        [innerStrokeWidth]="5"
+        [animateTitle]="false"
+        [showSubtitle]="false"
+        [showUnits]="false"
+        [showBackground]="false"
+        [responsive]="true"
+        [showZeroOuterStroke]="false"
+      ></circle-progress>
+    </div>
+    <div class="col-3">
+      <div class="row">
+        <div class="col-4 p-1" *ngFor="let dummy of ' '.repeat(player.lives).split('')">
+          <fa-icon class="heart" style="color: deeppink"
+                   [icon]="faHeart"></fa-icon>
+        </div>
+      </div>
+    </div>
+    <div class="col-3 text-right ">
       <h2 class="p-1 m-0">Skóre: {{player.score}}</h2>
     </div>
   </div>
@@ -50,13 +83,17 @@
     <div class="col-6 text-center">
       <fa-icon [icon]="faInfoCircle"></fa-icon>
       <h5>Správnou odpověď vyberte kliknutím nebo stisknutím šipek na klávesnici
-        ( <fa-icon [icon]="faArrowLeft"></fa-icon> a
-        <fa-icon [icon]="faArrowRight"></fa-icon> ).
+        (
+        <fa-icon [icon]="faArrowLeft"></fa-icon>
+        a
+        <fa-icon [icon]="faArrowRight"></fa-icon>
+        ).
       </h5>
     </div>
 
     <div class="col-3 text-center ">
-      <button class="btn btn-info btn-lg" id="leaderboardButton" (click)="open(leaderboardModal)">Nejvyšší skóre</button>
+      <button class="btn btn-info btn-lg" id="leaderboardButton" (click)="open(leaderboardModal)">Nejvyšší skóre
+      </button>
       <ng-template #leaderboardModal let-modal>
         <div class="modal-header">
           <h4 class="modal-title" id="leaderboardModal">Opravdu chcete ukončit hru?</h4>

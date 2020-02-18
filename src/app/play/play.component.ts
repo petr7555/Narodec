@@ -10,6 +10,7 @@ import {NationService} from '../nations/nation.service';
 import {faInfoCircle} from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 import {faArrowLeft} from '@fortawesome/free-solid-svg-icons/faArrowLeft';
 import {faArrowRight} from '@fortawesome/free-solid-svg-icons/faArrowRight';
+import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
 
 const DELAY = 1500;
 
@@ -23,6 +24,7 @@ export class PlayComponent implements OnInit {
   faInfoCircle = faInfoCircle;
   faArrowLeft = faArrowLeft;
   faArrowRight = faArrowRight;
+  faHeart = faHeart;
 
   modalOptions: NgbModalOptions;
   private player: Player = new Player();
@@ -47,6 +49,25 @@ export class PlayComponent implements OnInit {
   private ref;
 
   private showPercent = false;
+  private showGameOverScreen = false;
+
+  private timerPercent = 0;
+  private formatSubtitle = (percent: number): number => {
+    if (percent >= 100) {
+      return 0;
+    } else if (percent >= 80) {
+      return 1;
+    } else if (percent >= 60) {
+      return 2;
+    } else if (percent >= 40) {
+      return 3;
+    } else if (percent >= 20) {
+      return 4;
+    } else {
+      return 5;
+    }
+  };
+  private interval;
 
   constructor(private modalService: NgbModal, private route: ActivatedRoute, private router: Router, private playerService: PlayerService, private nationService: NationService) {
     this.modalOptions = {
@@ -108,7 +129,7 @@ export class PlayComponent implements OnInit {
       this.player.score++;
       this.updateCorrect();
     } else {
-      this.player.score--;
+      this.loseLife();
       this.updateWrong();
     }
     this.showCorrect();
@@ -119,8 +140,7 @@ export class PlayComponent implements OnInit {
       this.player.score++;
       this.updateCorrect();
     } else {
-      //update number of wrong
-      this.player.score--;
+      this.loseLife();
       this.updateWrong();
     }
     this.showCorrect();
@@ -139,6 +159,8 @@ export class PlayComponent implements OnInit {
   }
 
   loadNew() {
+    this.timerPercent = 0;
+
     // Reset colors
     this.setBtnColor(this.leftButton, 'primary');
     this.setBtnColor(this.rightButton, 'warning');
@@ -171,12 +193,21 @@ export class PlayComponent implements OnInit {
       this.leftButton.disabled = false;
       this.rightButton.disabled = false;
 
+      this.interval = setInterval(() => {
+          this.timerPercent++;
+          if (this.timerPercent == 100) {
+            this.loseLife();
+            this.showCorrect();
+          }
+        }
+        , 50);
       this.loaded = true;
       this.showPercent = false;
     });
   }
 
   async showCorrect() {
+    clearInterval(this.interval);
 
     // Disable clicking
     this.leftButton.disabled = true;
@@ -217,5 +248,22 @@ export class PlayComponent implements OnInit {
 
   saveScore() {
     this.playerService.createPlayer(this.player);
+  }
+
+  loseLife() {
+    this.player.lives--;
+    console.log(this.player.lives);
+    if (this.player.lives == 0) {
+      this.endGame();
+    }
+  }
+
+  endGame() {
+    this.showGameOverScreen = true;
+    this.saveScore();
+    setTimeout(() => {
+        this.router.navigateByUrl('leaderboard');
+      },
+      2000);
   }
 }
