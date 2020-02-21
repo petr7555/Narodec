@@ -1,5 +1,5 @@
 <div [hidden]="loaded" style="padding-top: 2rem"><h1>Vítej ve hře, {{player.name}}!</h1></div>
-<div [hidden]="!showGameOverScreen"><h1>Game over!</h1></div>
+<div [hidden]="!showGameOverScreen" style="padding-top: 2rem"><h1>Game over!</h1></div>
 <div [hidden]="!loaded || showGameOverScreen" class="container">
   <div class="row ml-2 mt-2" style="max-width: 10%">
     <circle-progress
