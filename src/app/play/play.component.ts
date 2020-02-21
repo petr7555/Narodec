@@ -234,6 +234,9 @@ export class PlayComponent implements OnInit {
     this.showPercent = true;
     await this.delay(DELAY);
 
+    if (this.player.lives == 0) {
+      this.endGame();
+    }
     // Load next question
     this.loadNew();
   }
@@ -252,10 +255,6 @@ export class PlayComponent implements OnInit {
 
   loseLife() {
     this.player.lives--;
-    console.log(this.player.lives);
-    if (this.player.lives == 0) {
-      this.endGame();
-    }
   }
 
   endGame() {
