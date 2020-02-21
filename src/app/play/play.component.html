@@ -1,33 +1,33 @@
-<div [hidden]="loaded"><h1>Vítej ve hře, {{player.name}}!</h1></div>
+<div [hidden]="loaded" style="padding-top: 2rem"><h1>Vítej ve hře, {{player.name}}!</h1></div>
 <div [hidden]="!showGameOverScreen"><h1>Game over!</h1></div>
 <div [hidden]="!loaded || showGameOverScreen" class="container">
+  <div class="row ml-2 mt-2" style="max-width: 10%">
+    <circle-progress
+      [titleFormat]="formatSubtitle"
+      [percent]="timerPercent"
+      [radius]="30"
+      [animation]="false"
+      [backgroundStrokeWidth]="0"
+      [space]="-5"
+      [toFixed]="0"
+      [maxPercent]="100"
+      [outerStrokeGradient]="true"
+      [outerStrokeWidth]="5"
+      [outerStrokeColor]="'#4882c2'"
+      [outerStrokeGradientStopColor]="'#53a9ff'"
+      [innerStrokeColor]="'#e7e8ea'"
+      [innerStrokeWidth]="5"
+      [animateTitle]="false"
+      [showSubtitle]="false"
+      [showUnits]="false"
+      [showBackground]="false"
+      [responsive]="true"
+      [showZeroOuterStroke]="false"
+    ></circle-progress>
+  </div>
   <div class="row">
-    <div class="col-3 text-left">
+    <div class="col-6 text-left">
       <h1 class="p-1 m-0">{{country}}</h1>
-    </div>
-    <div class="col-3 text-left">
-      <circle-progress
-        [titleFormat]="formatSubtitle"
-        [percent]="timerPercent"
-        [radius]="30"
-        [animation]="false"
-        [backgroundStrokeWidth]="0"
-        [space]="-5"
-        [toFixed]="0"
-        [maxPercent]="100"
-        [outerStrokeGradient]="true"
-        [outerStrokeWidth]="5"
-        [outerStrokeColor]="'#4882c2'"
-        [outerStrokeGradientStopColor]="'#53a9ff'"
-        [innerStrokeColor]="'#e7e8ea'"
-        [innerStrokeWidth]="5"
-        [animateTitle]="false"
-        [showSubtitle]="false"
-        [showUnits]="false"
-        [showBackground]="false"
-        [responsive]="true"
-        [showZeroOuterStroke]="false"
-      ></circle-progress>
     </div>
     <div class="col-3">
       <div class="row">
@@ -37,8 +37,9 @@
         </div>
       </div>
     </div>
-    <div class="col-3 text-right ">
-      <h2 class="p-1 m-0">Skóre: {{player.score}}</h2>
+    <div class="col-3 text-center">
+      <h2 class="p-1 m-0">Skóre:</h2>
+      <h2 class="p-1 m-0">{{player.score}}</h2>
     </div>
   </div>
   <div class="row">

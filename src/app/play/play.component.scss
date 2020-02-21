@@ -22,6 +22,7 @@ button {
 
 #homeButton, #leaderboardButton {
   min-width: 100%;
+  padding: 0.3rem;
 }
 
 #buttonGroup {
@@ -34,12 +35,6 @@ button {
 
 @media only screen and (max-width: 500px) {
   #homeButton, #leaderboardButton {
-    font-size: 0.6rem;
-  }
-
-  .heart {
-    font-size: 1rem;
+    font-size: 0.625rem;
   }
 }
-
-
