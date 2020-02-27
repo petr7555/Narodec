@@ -69,6 +69,11 @@ export class PlayComponent implements OnInit {
   };
   private interval;
 
+  private backgroundMusic;
+  private successSound;
+  private failSound;
+  private gameOverSound;
+
   constructor(private modalService: NgbModal, private route: ActivatedRoute, private router: Router, private playerService: PlayerService, private nationService: NationService) {
     this.modalOptions = {
       backdrop: 'static',
@@ -113,35 +118,65 @@ export class PlayComponent implements OnInit {
 
     this.ref = firebase.database().ref('/nations');
 
+    this.initSounds();
+
     this.initializeGame();
+  }
+
+  private initSounds() {
+    this.successSound = new Audio();
+    this.successSound.src = 'assets/audio/success_sound.wav';
+    this.successSound.load();
+
+    this.failSound = new Audio();
+    this.failSound.src = 'assets/audio/fail_sound.wav';
+    this.failSound.load();
+
+    this.gameOverSound = new Audio();
+    this.gameOverSound.src = 'assets/audio/game_over_sound.wav';
+    this.gameOverSound.load();
+
+    this.backgroundMusic = new Audio();
+    this.backgroundMusic.src = 'assets/audio/background_music.wav';
+    this.backgroundMusic.loop = true;
+    this.backgroundMusic.load();
   }
 
   initializeGame() {
     this.ref.orderByChild('index').limitToLast(1).once('value').then(snapshot => {
       const lastNation = snapshot.child(Object.keys(snapshot.val())[0]).val();
       this.numberOfNations = lastNation.index;
+      this.backgroundMusic.play();
       this.loadNew();
     });
   }
 
+  private wrong() {
+    this.loseLife();
+    this.updateWrong();
+  }
+
+  private correct() {
+    this.player.score++;
+    console.log("playing success");
+    this.successSound.play();
+    this.updateCorrect();
+  }
+
   clickedLeft() {
     if (this.result === 'left') {
-      this.player.score++;
-      this.updateCorrect();
+      this.correct();
     } else {
-      this.loseLife();
-      this.updateWrong();
+      this.wrong();
     }
     this.showCorrect();
   }
 
   clickedRight() {
     if (this.result === 'right') {
-      this.player.score++;
-      this.updateCorrect();
+      this.correct();
     } else {
-      this.loseLife();
-      this.updateWrong();
+      this.wrong();
     }
     this.showCorrect();
   }
@@ -207,6 +242,7 @@ export class PlayComponent implements OnInit {
   }
 
   async showCorrect() {
+    console.log("clearingInterval");
     clearInterval(this.interval);
 
     // Disable clicking
@@ -236,6 +272,7 @@ export class PlayComponent implements OnInit {
 
     if (this.player.lives == 0) {
       this.endGame();
+      return;
     }
     // Load next question
     this.loadNew();
@@ -255,10 +292,15 @@ export class PlayComponent implements OnInit {
 
   loseLife() {
     this.player.lives--;
+    console.log("playing fail");
+    this.failSound.play();
   }
 
   endGame() {
+    this.backgroundMusic.pause();
     this.showGameOverScreen = true;
+    console.log("playing game over");
+    this.gameOverSound.play();
     this.saveScore();
     setTimeout(() => {
         this.router.navigateByUrl('leaderboard');
