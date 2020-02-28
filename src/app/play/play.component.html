@@ -1,30 +1,35 @@
 <div [hidden]="loaded" style="padding-top: 2rem"><h1>Vítej ve hře, {{player.name}}!</h1></div>
-<div [hidden]="!showGameOverScreen" style="padding-top: 2rem"><h1>Game over!</h1></div>
-<div [hidden]="!loaded || showGameOverScreen" class="container">
-  <div class="row ml-2 mt-2" style="max-width: 10%">
-    <circle-progress
-      [titleFormat]="formatSubtitle"
-      [titleFontSize]="'1.5rem'"
-      [percent]="timerPercent"
-      [radius]="30"
-      [animation]="false"
-      [backgroundStrokeWidth]="0"
-      [space]="-5"
-      [toFixed]="0"
-      [maxPercent]="100"
-      [outerStrokeGradient]="true"
-      [outerStrokeWidth]="5"
-      [outerStrokeColor]="'#4882c2'"
-      [outerStrokeGradientStopColor]="'#53a9ff'"
-      [innerStrokeColor]="'#e7e8ea'"
-      [innerStrokeWidth]="5"
-      [animateTitle]="false"
-      [showSubtitle]="false"
-      [showUnits]="false"
-      [showBackground]="false"
-      [responsive]="true"
-      [showZeroOuterStroke]="false"
-    ></circle-progress>
+<div [hidden]="!loaded" class="container">
+  <div class="row ml-2 mt-2">
+    <div class="col" style="max-width: 20%">
+      <circle-progress
+        [titleFormat]="formatSubtitle"
+        [titleFontSize]="'1.5rem'"
+        [percent]="timerPercent"
+        [radius]="30"
+        [animation]="false"
+        [backgroundStrokeWidth]="0"
+        [space]="-5"
+        [toFixed]="0"
+        [maxPercent]="100"
+        [outerStrokeGradient]="true"
+        [outerStrokeWidth]="5"
+        [outerStrokeColor]="'#4882c2'"
+        [outerStrokeGradientStopColor]="'#53a9ff'"
+        [innerStrokeColor]="'#e7e8ea'"
+        [innerStrokeWidth]="5"
+        [animateTitle]="false"
+        [showSubtitle]="false"
+        [showUnits]="false"
+        [showBackground]="false"
+        [responsive]="true"
+        [showZeroOuterStroke]="false"
+      ></circle-progress>
+    </div>
+    <div class="col text-right pr-5 pt-5">
+      <fa-icon class="volume-icon" [hidden]="audioOn" [icon]="faVolumeMute" (click)="toggleAudio()"></fa-icon>
+      <fa-icon class="volume-icon" [hidden]="!audioOn" [icon]="faVolumeUp" (click)="toggleAudio()"></fa-icon>
+    </div>
   </div>
   <div class="row">
     <div class="col-6 text-left">
@@ -74,22 +79,21 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-success" (click)="modal.close()">Pokračovat ve hře</button>
-          <button type="button" class="btn btn-outline-danger" (click)="modal.close(); saveScore()"
-                  routerLink="">Ukončit
+          <button type="button" class="btn btn-outline-danger" (click)="modal.close(); saveScore()" routerLink="">
+            Ukončit
           </button>
         </div>
       </ng-template>
     </div>
 
 
-    <div class="col-6 text-center">
+    <div class="col-6 text-center" style="min-width: 10ch;">
       <fa-icon [icon]="faInfoCircle"></fa-icon>
-      <h5>Správnou odpověď vyberte kliknutím nebo stisknutím šipek na klávesnici
-        (
+      <h5>Správnou odpověď vyberte kliknutím nebo stisknutím šipek na klávesnici <span style="white-space: nowrap">(
         <fa-icon [icon]="faArrowLeft"></fa-icon>
         a
         <fa-icon [icon]="faArrowRight"></fa-icon>
-        ).
+        ).</span>
       </h5>
     </div>
 
@@ -109,7 +113,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-success" (click)="modal.close()">Pokračovat ve hře</button>
           <button type="button" class="btn btn-outline-danger" (click)="modal.close(); saveScore()"
-                  routerLink="/leaderboard">Ukončit
+                  [queryParams]="{volume: audioOn}" routerLink="/leaderboard">Ukončit
           </button>
         </div>
       </ng-template>

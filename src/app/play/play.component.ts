@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import * as firebase from 'firebase';
 
 import {NgbModal, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
@@ -11,6 +11,8 @@ import {faInfoCircle} from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 import {faArrowLeft} from '@fortawesome/free-solid-svg-icons/faArrowLeft';
 import {faArrowRight} from '@fortawesome/free-solid-svg-icons/faArrowRight';
 import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
+import {faVolumeUp} from '@fortawesome/free-solid-svg-icons/faVolumeUp';
+import {faVolumeMute} from '@fortawesome/free-solid-svg-icons/faVolumeMute';
 
 const DELAY = 1500;
 
@@ -20,11 +22,13 @@ const DELAY = 1500;
   styleUrls: ['./play.component.scss']
 })
 
-export class PlayComponent implements OnInit {
+export class PlayComponent implements OnInit, OnDestroy {
   faInfoCircle = faInfoCircle;
   faArrowLeft = faArrowLeft;
   faArrowRight = faArrowRight;
   faHeart = faHeart;
+  faVolumeUp = faVolumeUp;
+  faVolumeMute = faVolumeMute;
 
   modalOptions: NgbModalOptions;
   private player: Player = new Player();
@@ -49,7 +53,6 @@ export class PlayComponent implements OnInit {
   private ref;
 
   private showPercent = false;
-  private showGameOverScreen = false;
 
   private timerPercent = 0;
   private formatSubtitle = (percent: number): number => {
@@ -72,7 +75,7 @@ export class PlayComponent implements OnInit {
   private backgroundMusic;
   private successSound;
   private failSound;
-  private gameOverSound;
+  private audioOn = false;
 
   constructor(private modalService: NgbModal, private route: ActivatedRoute, private router: Router, private playerService: PlayerService, private nationService: NationService) {
     this.modalOptions = {
@@ -126,19 +129,18 @@ export class PlayComponent implements OnInit {
   private initSounds() {
     this.successSound = new Audio();
     this.successSound.src = 'assets/audio/success_sound.wav';
+    this.successSound.muted = true;
     this.successSound.load();
 
     this.failSound = new Audio();
     this.failSound.src = 'assets/audio/fail_sound.wav';
+    this.failSound.muted = true;
     this.failSound.load();
-
-    this.gameOverSound = new Audio();
-    this.gameOverSound.src = 'assets/audio/game_over_sound.wav';
-    this.gameOverSound.load();
 
     this.backgroundMusic = new Audio();
     this.backgroundMusic.src = 'assets/audio/background_music.wav';
     this.backgroundMusic.loop = true;
+    this.backgroundMusic.muted = true;
     this.backgroundMusic.load();
   }
 
@@ -158,7 +160,6 @@ export class PlayComponent implements OnInit {
 
   private correct() {
     this.player.score++;
-    console.log("playing success");
     this.successSound.play();
     this.updateCorrect();
   }
@@ -242,7 +243,6 @@ export class PlayComponent implements OnInit {
   }
 
   async showCorrect() {
-    console.log("clearingInterval");
     clearInterval(this.interval);
 
     // Disable clicking
@@ -292,19 +292,25 @@ export class PlayComponent implements OnInit {
 
   loseLife() {
     this.player.lives--;
-    console.log("playing fail");
     this.failSound.play();
   }
 
   endGame() {
-    this.backgroundMusic.pause();
-    this.showGameOverScreen = true;
-    console.log("playing game over");
-    this.gameOverSound.play();
     this.saveScore();
-    setTimeout(() => {
-        this.router.navigateByUrl('leaderboard');
-      },
-      2000);
+    this.router.navigate(['/leaderboard'], { queryParams: { volume: this.audioOn }});
+  }
+
+  toggleAudio() {
+    this.audioOn = !this.audioOn;
+    this.backgroundMusic.muted = !this.backgroundMusic.muted;
+    this.successSound.muted = !this.successSound.muted;
+    this.failSound.muted = !this.failSound.muted;
+  }
+
+  ngOnDestroy(): void {
+    this.backgroundMusic.pause();
+    this.successSound.pause();
+    this.failSound.pause();
+    clearInterval(this.interval);
   }
 }

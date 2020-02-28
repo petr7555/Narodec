@@ -1,4 +1,5 @@
-<div class="container m-3">
+<div [hidden]="!showGameOverScreen" style="padding-top: 2rem"><h1>Game over!</h1></div>
+<div [hidden]="showGameOverScreen" class="container m-3">
   <div class="card">
     <div class="card-header text-center"><h2>Top 10</h2></div>
     <div class="card-body">
