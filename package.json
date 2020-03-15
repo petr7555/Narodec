@@ -9,7 +9,7 @@
     "test": "npx cypress run --record --key 857e1ed7-63da-4ffd-832e-26b13f096117",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "e2e": "ng e2e",
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
