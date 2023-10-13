@@ -1,7 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Nation} from '../nations/nation';
-import {Player} from './player';
-import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
+import { Injectable } from '@angular/core';
+import { Player } from './player';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root'

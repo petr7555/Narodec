@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NationService } from '../nation.service';
-import {Nation} from '../nation';
+import { Nation } from '../nation';
 
 @Component({
   selector: 'app-create-customer',
@@ -12,7 +12,7 @@ export class CreateNationComponent implements OnInit {
   nation: Nation = new Nation();
   submitted = false;
 
-  constructor(private customerService: NationService) { }
+  constructor(private nationService: NationService) { }
 
   ngOnInit() {
   }
@@ -23,7 +23,7 @@ export class CreateNationComponent implements OnInit {
   }
 
   save() {
-    this.customerService.createNation(this.nation);
+    this.nationService.createNation(this.nation);
     this.nation = new Nation();
   }
 

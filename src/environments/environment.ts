@@ -8,7 +8,7 @@ const firebaseConfig = {
   projectId: "narodec-64814",
   storageBucket: "narodec-64814.appspot.com",
   messagingSenderId: "323728121178",
-  appId: "1:323728121178:web:f5d05250f83cc00f852763"
+  appId: "1:323728121178:web:f5d05250f83cc00f852763",
 };
 
 export const environment = {

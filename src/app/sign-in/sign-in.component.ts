@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {ShortcutInput} from 'ng-keyboard-shortcuts';
+import { Component, OnInit } from '@angular/core';
+import { ShortcutInput } from 'ng-keyboard-shortcuts';
 
 @Component({
   selector: 'app-sign-in',

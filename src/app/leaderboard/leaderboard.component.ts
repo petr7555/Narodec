@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {AngularFireDatabase} from '@angular/fire/database';
-import {map} from 'rxjs/operators';
-import {ActivatedRoute} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { map } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-leaderboard',

@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {PlayComponent} from './play/play.component';
-import {SignInComponent} from './sign-in/sign-in.component';
-import {CreateNationComponent} from './nations/create-nation/create-nation.component';
-import {LeaderboardComponent} from './leaderboard/leaderboard.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { PlayComponent } from './play/play.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { CreateNationComponent } from './nations/create-nation/create-nation.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 const routes: Routes = [
   {path: '', component: SignInComponent},
