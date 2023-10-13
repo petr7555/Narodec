@@ -3,6 +3,6 @@ export class Nation {
   country: string;
   correct: string;
   wrong: string;
-  numOfCorrect: number = 0;
-  numOfWrong: number = 0;
+  numOfCorrect = 0;
+  numOfWrong = 0;
 }

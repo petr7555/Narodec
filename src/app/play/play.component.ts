@@ -1,18 +1,18 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as firebase from 'firebase';
 
-import {NgbModal, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
-import {ShortcutInput} from 'ng-keyboard-shortcuts';
-import {Player} from '../players/player';
-import {PlayerService} from '../players/player.service';
-import {NationService} from '../nations/nation.service';
-import {faInfoCircle} from '@fortawesome/free-solid-svg-icons/faInfoCircle';
-import {faArrowLeft} from '@fortawesome/free-solid-svg-icons/faArrowLeft';
-import {faArrowRight} from '@fortawesome/free-solid-svg-icons/faArrowRight';
-import {faHeart} from '@fortawesome/free-solid-svg-icons/faHeart';
-import {faVolumeUp} from '@fortawesome/free-solid-svg-icons/faVolumeUp';
-import {faVolumeMute} from '@fortawesome/free-solid-svg-icons/faVolumeMute';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { ShortcutInput } from 'ng-keyboard-shortcuts';
+import { Player } from '../players/player';
+import { PlayerService } from '../players/player.service';
+import { NationService } from '../nations/nation.service';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons/faArrowLeft';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons/faArrowRight';
+import { faHeart } from '@fortawesome/free-solid-svg-icons/faHeart';
+import { faVolumeUp } from '@fortawesome/free-solid-svg-icons/faVolumeUp';
+import { faVolumeMute } from '@fortawesome/free-solid-svg-icons/faVolumeMute';
 
 const DELAY = 1500;
 
@@ -55,6 +55,14 @@ export class PlayComponent implements OnInit, OnDestroy {
   private showPercent = false;
 
   private timerPercent = 0;
+
+  private interval;
+
+  private backgroundMusic;
+  private successSound;
+  private failSound;
+  private audioOn = false;
+
   private formatSubtitle = (percent: number): number => {
     if (percent >= 100) {
       return 0;
@@ -70,14 +78,9 @@ export class PlayComponent implements OnInit, OnDestroy {
       return 5;
     }
   };
-  private interval;
 
-  private backgroundMusic;
-  private successSound;
-  private failSound;
-  private audioOn = false;
-
-  constructor(private modalService: NgbModal, private route: ActivatedRoute, private router: Router, private playerService: PlayerService, private nationService: NationService) {
+  constructor(private modalService: NgbModal, private route: ActivatedRoute, private router: Router,
+              private playerService: PlayerService, private nationService: NationService) {
     this.modalOptions = {
       backdrop: 'static',
       backdropClass: 'customBackdrop'
@@ -297,7 +300,7 @@ export class PlayComponent implements OnInit, OnDestroy {
 
   endGame() {
     this.saveScore();
-    this.router.navigate(['/leaderboard'], { queryParams: { volume: this.audioOn }});
+    this.router.navigate(['/leaderboard'], {queryParams: {volume: this.audioOn}});
   }
 
   toggleAudio() {
