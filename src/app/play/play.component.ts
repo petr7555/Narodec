@@ -1,7 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as firebase from 'firebase';
-
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ShortcutInput } from 'ng-keyboard-shortcuts';
 import { Player } from '../players/player';
@@ -13,6 +11,8 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons/faArrowRight';
 import { faHeart } from '@fortawesome/free-solid-svg-icons/faHeart';
 import { faVolumeUp } from '@fortawesome/free-solid-svg-icons/faVolumeUp';
 import { faVolumeMute } from '@fortawesome/free-solid-svg-icons/faVolumeMute';
+import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
+import { Nation } from "../nations/nation";
 
 const DELAY = 1500;
 
@@ -50,7 +50,6 @@ export class PlayComponent implements OnInit, OnDestroy {
 
   private loaded = false;
   private numberOfNations;
-  private ref;
 
   private showPercent = false;
 
@@ -62,6 +61,8 @@ export class PlayComponent implements OnInit, OnDestroy {
   private successSound;
   private failSound;
   private audioOn = false;
+
+  nationsRef: AngularFireList<Nation> = null;
 
   private formatSubtitle = (percent: number): number => {
     if (percent >= 100) {
@@ -80,7 +81,8 @@ export class PlayComponent implements OnInit, OnDestroy {
   };
 
   constructor(private modalService: NgbModal, private route: ActivatedRoute, private router: Router,
-              private playerService: PlayerService, private nationService: NationService) {
+              private playerService: PlayerService, private nationService: NationService, private db: AngularFireDatabase) {
+    this.nationsRef = db.list('/nations');
     this.modalOptions = {
       backdrop: 'static',
       backdropClass: 'customBackdrop'
@@ -92,7 +94,6 @@ export class PlayComponent implements OnInit, OnDestroy {
     }, (reason) => {
     });
   }
-
 
   ngOnInit() {
     this.player.name = this.route.snapshot.queryParams['player'];
@@ -122,8 +123,6 @@ export class PlayComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.ref = firebase.database().ref('/nations');
-
     this.initSounds();
 
     this.initializeGame();
@@ -148,7 +147,7 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   initializeGame() {
-    this.ref.orderByChild('index').limitToLast(1).once('value').then(snapshot => {
+    this.nationsRef.query.orderByChild('index').limitToLast(1).once('value').then(snapshot => {
       const lastNation = snapshot.child(Object.keys(snapshot.val())[0]).val();
       this.numberOfNations = lastNation.index;
       this.backgroundMusic.play();
@@ -206,7 +205,7 @@ export class PlayComponent implements OnInit, OnDestroy {
 
     const startIndex = Math.ceil(Math.random() * this.numberOfNations);
 
-    this.ref.orderByChild('index').startAt(startIndex).limitToFirst(1).once('value').then(snapshot => {
+    this.nationsRef.query.orderByChild('index').startAt(startIndex).limitToFirst(1).once('value').then(snapshot => {
       this.nationKey = Object.keys(snapshot.val())[0];
 
       const nation = snapshot.child(this.nationKey).val();
