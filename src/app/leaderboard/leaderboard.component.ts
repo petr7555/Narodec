@@ -35,7 +35,7 @@ export class LeaderboardComponent implements OnInit {
     this.db.list('/players', ref => ref.orderByChild('score').limitToLast(10)).snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
-          ({key: c.payload.key, ...c.payload.val()})
+          ({key: c.payload.key, ...c.payload.val() as any})
         )
       )
     ).subscribe(topPlayers => {

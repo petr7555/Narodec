@@ -34,7 +34,6 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     NgbModule,
     KeyboardShortcutsModule.forRoot(),
     FontAwesomeModule,
-    // Specify ng-circle-progress as an import
     NgCircleProgressModule.forRoot(),
   ],
   providers: [],
