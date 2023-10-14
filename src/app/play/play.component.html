@@ -1,124 +1,128 @@
 <div [hidden]="loaded" style="padding-top: 2rem"><h1>Vítej ve hře, {{player.name}}!</h1></div>
 <div [hidden]="!loaded" class="container">
-  <div class="row ml-2 mt-2">
-    <div class="col" style="max-width: 20%">
-      <circle-progress
-        [titleFormat]="formatSubtitle"
-        [titleFontSize]="'1.5rem'"
-        [percent]="timerPercent"
-        [radius]="30"
-        [animation]="false"
-        [backgroundStrokeWidth]="0"
-        [space]="-5"
-        [toFixed]="0"
-        [maxPercent]="100"
-        [outerStrokeGradient]="true"
-        [outerStrokeWidth]="5"
-        [outerStrokeColor]="'#4882c2'"
-        [outerStrokeGradientStopColor]="'#53a9ff'"
-        [innerStrokeColor]="'#e7e8ea'"
-        [innerStrokeWidth]="5"
-        [animateTitle]="false"
-        [showSubtitle]="false"
-        [showUnits]="false"
-        [showBackground]="false"
-        [responsive]="true"
-        [showZeroOuterStroke]="false"
-      ></circle-progress>
-    </div>
-    <div class="col text-right pr-5 pt-5">
-      <fa-icon class="volume-icon" [hidden]="audioOn" [icon]="faVolumeMute" (click)="toggleAudio()"></fa-icon>
-      <fa-icon class="volume-icon" [hidden]="!audioOn" [icon]="faVolumeUp" (click)="toggleAudio()"></fa-icon>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-6 text-left">
-      <h1 class="p-1 m-0">{{country}}</h1>
-    </div>
-    <div class="col-3">
-      <div class="row">
-        <div class="col-4 p-1" *ngFor="let dummy of ' '.repeat(player.lives).split('')">
-          <fa-icon class="heart" style="color: deeppink"
-                   [icon]="faHeart"></fa-icon>
+    <div class="row ml-2 mt-2">
+        <div class="col" style="max-width: 20%">
+            <circle-progress
+                    [titleFormat]="formatSubtitle"
+                    [titleFontSize]="'1.5rem'"
+                    [percent]="timerPercent"
+                    [radius]="30"
+                    [animation]="false"
+                    [backgroundStrokeWidth]="0"
+                    [space]="-5"
+                    [toFixed]="0"
+                    [maxPercent]="100"
+                    [outerStrokeGradient]="true"
+                    [outerStrokeWidth]="5"
+                    [outerStrokeColor]="'#4882c2'"
+                    [outerStrokeGradientStopColor]="'#53a9ff'"
+                    [innerStrokeColor]="'#e7e8ea'"
+                    [innerStrokeWidth]="5"
+                    [animateTitle]="false"
+                    [showSubtitle]="false"
+                    [showUnits]="false"
+                    [showBackground]="false"
+                    [responsive]="true"
+                    [showZeroOuterStroke]="false"
+            ></circle-progress>
         </div>
-      </div>
-    </div>
-    <div class="col-3 text-center">
-      <h2 class="p-1 m-0">Skóre:</h2>
-      <h2 class="p-1 m-0">{{player.score}}</h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <div class="btn-group vh-50" id="buttonGroup" role="group">
-        <button type="button" class="btn btn-primary" (click)="clickedLeft()" id="leftButton">
-          <h3>{{leftText}}</h3>
-          <h3 *ngIf="showPercent" style="line-height: 1">{{percentLeft}} %</h3>
-          <div *ngIf="!showPercent" class="filler"></div>
-        </button>
-        <button type="button" class="btn btn-warning" (click)="clickedRight()" id="rightButton">
-          <h3>{{rightText}}</h3>
-          <h3 *ngIf="showPercent" style="line-height: 1">{{percentRight}} %</h3>
-          <div *ngIf="!showPercent" class="filler"></div>
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="row mt-3">
-    <div class="col-3 text-center">
-      <button class="btn btn-info btn-lg" id="homeButton" (click)="open(mainScreenModal)">Domů</button>
-      <ng-template #mainScreenModal let-modal>
-        <div class="modal-header">
-          <h4 class="modal-title" id="mainScreenModal">Opravdu chcete ukončit hru?</h4>
-          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div class="col text-right pr-5 pt-5">
+            <fa-icon class="volume-icon" [hidden]="audioOn" [icon]="faVolumeMute" (click)="toggleAudio()"></fa-icon>
+            <fa-icon class="volume-icon" [hidden]="!audioOn" [icon]="faVolumeUp" (click)="toggleAudio()"></fa-icon>
         </div>
-        <div class="modal-body">
-          Současná hra skončí a vaše skóre bude uloženo.
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-success" (click)="modal.close()">Pokračovat ve hře</button>
-          <button type="button" class="btn btn-outline-danger" (click)="modal.close(); saveScore()" routerLink="">
-            Ukončit
-          </button>
-        </div>
-      </ng-template>
     </div>
+    <div class="row">
+        <div class="col-6 text-left">
+            <h1 class="p-1 m-0">{{country}}</h1>
+        </div>
+        <div class="col-3">
+            <div class="row">
+                <div class="col-4 p-1" *ngFor="let dummy of ' '.repeat(player.lives).split('')">
+                    <fa-icon class="heart" style="color: deeppink"
+                             [icon]="faHeart"></fa-icon>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 text-center">
+            <h2 class="p-1 m-0">Skóre:</h2>
+            <h2 class="p-1 m-0">{{player.score}}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="btn-group vh-50" id="buttonGroup" role="group">
+                <button type="button" class="btn btn-primary" (click)="clickedLeft()" id="leftButton">
+                    <h3>{{leftText}}</h3>
+                    <h3 *ngIf="showPercent" style="line-height: 1">{{percentLeft}} %</h3>
+                    <div *ngIf="!showPercent" class="filler"></div>
+                </button>
+                <button type="button" class="btn btn-warning" (click)="clickedRight()" id="rightButton">
+                    <h3>{{rightText}}</h3>
+                    <h3 *ngIf="showPercent" style="line-height: 1">{{percentRight}} %</h3>
+                    <div *ngIf="!showPercent" class="filler"></div>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-3 text-center">
+            <button class="btn btn-info btn-lg" id="homeButton" (click)="open(mainScreenModal)">Domů</button>
+            <ng-template #mainScreenModal let-modal>
+                <div class="modal-header">
+                    <h4 class="modal-title" id="mainScreenModal">Opravdu chcete ukončit hru?</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Současná hra skončí a vaše skóre bude uloženo.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-success" (click)="modal.close()">Pokračovat ve hře
+                    </button>
+                    <button type="button" class="btn btn-outline-danger" (click)="modal.close(); saveScore()"
+                            routerLink="">
+                        Ukončit
+                    </button>
+                </div>
+            </ng-template>
+        </div>
 
 
-    <div class="col-6 text-center" style="min-width: 10ch;">
-      <fa-icon [icon]="faInfoCircle"></fa-icon>
-      <h5>Správnou odpověď vyberte kliknutím nebo stisknutím šipek na klávesnici <span style="white-space: nowrap">(
+        <div class="col-6 text-center" style="min-width: 10ch;">
+            <fa-icon [icon]="faInfoCircle"></fa-icon>
+            <h5>Správnou odpověď vyberte kliknutím nebo stisknutím šipek na klávesnici <span
+                    style="white-space: nowrap">(
         <fa-icon [icon]="faArrowLeft"></fa-icon>
         a
         <fa-icon [icon]="faArrowRight"></fa-icon>
         ).</span>
-      </h5>
-    </div>
+            </h5>
+        </div>
 
-    <div class="col-3 text-center ">
-      <button class="btn btn-info btn-lg" id="leaderboardButton" (click)="open(leaderboardModal)">Nejvyšší skóre
-      </button>
-      <ng-template #leaderboardModal let-modal>
-        <div class="modal-header">
-          <h4 class="modal-title" id="leaderboardModal">Opravdu chcete ukončit hru?</h4>
-          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          Současná hra skončí a vaše skóre bude uloženo.
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-success" (click)="modal.close()">Pokračovat ve hře</button>
-          <button type="button" class="btn btn-outline-danger" (click)="modal.close(); saveScore()"
-                  [queryParams]="{volume: audioOn}" routerLink="/leaderboard">Ukončit
-          </button>
-        </div>
-      </ng-template>
+        <div class="col-3 text-center ">
+            <button class="btn btn-info btn-lg" id="leaderboardButton" (click)="open(leaderboardModal)">Nejvyšší skóre
+            </button>
+            <ng-template #leaderboardModal let-modal>
+                <div class="modal-header">
+                    <h4 class="modal-title" id="leaderboardModal">Opravdu chcete ukončit hru?</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Současná hra skončí a vaše skóre bude uloženo.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-success" (click)="modal.close()">Pokračovat ve hře
+                    </button>
+                    <button type="button" class="btn btn-outline-danger" (click)="modal.close(); saveScore()"
+                            [queryParams]="{volume: audioOn}" routerLink="/leaderboard">Ukončit
+                    </button>
+                </div>
+            </ng-template>
 
+        </div>
     </div>
-  </div>
 </div>
 <ng-keyboard-shortcuts [shortcuts]="shortcuts"></ng-keyboard-shortcuts>

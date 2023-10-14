@@ -1,26 +1,26 @@
 <h3>Přidat zemi</h3>
 <div [hidden]="submitted" style="width: 300px;">
-  <form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="country">Země</label>
-      <input type="text" class="form-control" id="country" required [(ngModel)]="nation.country" name="country">
-    </div>
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="country">Země</label>
+            <input type="text" class="form-control" id="country" required [(ngModel)]="nation.country" name="country">
+        </div>
 
-    <div class="form-group">
-      <label for="correct">Správně</label>
-      <input type="text" class="form-control" id="correct" required [(ngModel)]="nation.correct" name="correct">
-    </div>
+        <div class="form-group">
+            <label for="correct">Správně</label>
+            <input type="text" class="form-control" id="correct" required [(ngModel)]="nation.correct" name="correct">
+        </div>
 
-    <div class="form-group">
-      <label for="wrong">Špatně</label>
-      <input type="text" class="form-control" id="wrong" required [(ngModel)]="nation.wrong" name="wrong">
-    </div>
+        <div class="form-group">
+            <label for="wrong">Špatně</label>
+            <input type="text" class="form-control" id="wrong" required [(ngModel)]="nation.wrong" name="wrong">
+        </div>
 
-    <button type="submit" class="btn btn-success">Uložit</button>
-  </form>
+        <button type="submit" class="btn btn-success">Uložit</button>
+    </form>
 </div>
 
 <div [hidden]="!submitted">
-  <h4>Úspěšně uloženo!</h4>
-  <button class="btn btn-success" (click)="newNation()">Přidat další</button>
+    <h4>Úspěšně uloženo!</h4>
+    <button class="btn btn-success" (click)="newNation()">Přidat další</button>
 </div>

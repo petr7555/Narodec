@@ -12,7 +12,8 @@ export class CreateNationComponent implements OnInit {
   nation: Nation = new Nation();
   submitted = false;
 
-  constructor(private nationService: NationService) { }
+  constructor(private nationService: NationService) {
+  }
 
   ngOnInit() {
   }

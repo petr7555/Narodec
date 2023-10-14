@@ -11,8 +11,8 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons/faArrowRight';
 import { faHeart } from '@fortawesome/free-solid-svg-icons/faHeart';
 import { faVolumeUp } from '@fortawesome/free-solid-svg-icons/faVolumeUp';
 import { faVolumeMute } from '@fortawesome/free-solid-svg-icons/faVolumeMute';
-import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
-import { Nation } from "../nations/nation";
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { Nation } from '../nations/nation';
 
 const DELAY = 1500;
 
