@@ -9,6 +9,7 @@ const firebaseConfig = {
   storageBucket: "narodec-64814.appspot.com",
   messagingSenderId: "323728121178",
   appId: "1:323728121178:web:f5d05250f83cc00f852763",
+  databaseURL: "https://narodec-64814-default-rtdb.europe-west1.firebasedatabase.app/"
 };
 
 export const environment = {
