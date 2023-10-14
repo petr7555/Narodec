@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ShortcutInput } from 'ng-keyboard-shortcuts';
+import { AllowIn, ShortcutInput } from 'ng-keyboard-shortcuts';
 
 @Component({
   selector: 'app-sign-in',
@@ -20,6 +20,7 @@ export class SignInComponent implements OnInit {
       {
         key: ['enter'],
         description: 'Enter',
+        allowIn: [AllowIn.Input],
         command: e => {
           document.getElementById('signin-button').click();
         },
